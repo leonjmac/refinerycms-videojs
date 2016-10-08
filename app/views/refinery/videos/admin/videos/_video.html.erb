@@ -1,11 +1,11 @@
 <li style="min-height: 35px" class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(video) -%>">
-  <span class='title'>
+  <div class='title'>
     <%= video.title %>
-    <span class='short_info'>(
+    <p class='short_info'>(
       <% video.short_info.each do |info| %>
        <%= "#{t(info[0])}: #{info[1]}" %>
-    <% end %>)</span>
-  </span>
+    <% end %>)</p>
+  </div>
   <% unless action_name =~ /insert/   %>
   <span class='actions'>
     <%= link_to refinery_icon_tag('eye.png'), refinery.videos_admin_video_path(video, :dialog => true),
