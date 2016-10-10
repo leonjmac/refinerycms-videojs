@@ -4,7 +4,6 @@
     background-repeat: no-repeat;
     padding-left: 24px;
 }
-
 label.inline{
     display: inline-block;
     margin-bottom: 10px;
@@ -49,7 +48,9 @@ textarea.embed_tag{
 }
 
 span.short_info{
-    color: gray
+    color: gray;
+    font-style:italic;
+    font-size:smaller;
 }
 
 div.add_remove_buttons{
@@ -60,9 +61,12 @@ div#dialog_list{
     width: 60%; float: left; min-height: 300px
 }
 
-div#dialog_list li.selected{
-    border: 4px solid #22A7F2
+div#dialog_list li {
+  border:1px solid grey;
+  background-color: #ddd;
 }
+div$dialog_list li::nth-child(even) {background-color:#ccc;}
+div#dialog_list li.selected{  border: 4px solid #22A7F2;}
 
 div#dialog_preview{
     width:35%; float: right
@@ -87,4 +91,11 @@ div#preview_form div.options{
 div#dialog_list #records{
     width: 100%
 }
+
+li.record.video div.title { width: 75%;}
+li.record.video div.title span.files {
+  font-size:smaller;
+  font-style:italic;
+}
+li.record.video  span.actions {width:25%}
 

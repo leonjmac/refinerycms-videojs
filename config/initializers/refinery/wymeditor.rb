@@ -1,11 +1,10 @@
 Refinery::Core.configure do |config|
-	# Register extra javascript for backend
-  config.register_javascript "refinery/admin/wymeditor_monkeypatch"
+  # Register extra javascript for backend
+  config.register_javascript "refinery/admin/wymeditor_monkeypatch.js"
 
-	# Register extra stylesheet for backend
-  config.register_stylesheet "refinery/admin/refinerycms-videojs-admin", :media => 'screen'
+  #Register extra stylesheet for backend (optional options)
+  config.register_stylesheet "refinery/admin/video.css"
 end
-Rails.application.config.assets.precompile += %w( refinerycms-videojs-admin.css wymeditor_monkeypatch.js )
 
 Refinery::Wymeditor.configure do |config|
 
@@ -31,3 +30,4 @@ Refinery::Wymeditor.configure do |config|
   }
 }
 end
+
