@@ -1,7 +1,8 @@
 <li style="min-height: 35px" class='clearfix record video <%= cycle("on", "on-hover") %>' id="<%= dom_id(video) -%>">
   <div class='title'>
     <%= video.title %>
-    <span class='files'>(<%= video.video_files.map(&:file_name).to_sentence %> )</span>
+
+    <span class='files'>(<%= video.video_files.map{|vf| vf.use_external ? vf.external_url : vf.file_name}.to_sentence %> )</span>
   </div>
   <% unless action_name =~ /insert/   %>
     <span class='actions'>

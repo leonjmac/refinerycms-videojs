@@ -13,14 +13,13 @@ include ActionView::Context
       data_setup[option] = video.config[option] || 'auto'
     end
 
-
     options = {
       id: "video_#{video.id}",
-      class: "video_js #{Refinery::Videos.skin_css_class}",
+      class: "video-js #{Refinery::Videos.skin_css_class}",
       width: video.config[:width],
       height: video.config[:height],
       data: data_setup.to_json,
-      poster: video.poster.url||''
+      poster: '' || video.poster.url
       }
 
     sources = sources_html(video)
@@ -32,6 +31,7 @@ include ActionView::Context
       options = {
         src: file.use_external ? file.external_url : file.url,
         type: file.mime_type || file.file_mime_type
+
       }
       source = tag(:source, options, escape: false )
       buffer  << source if file.exist?
