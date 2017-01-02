@@ -16,11 +16,11 @@ include ActionView::Context
 
     options = {
       id: "video_#{video.id}",
-      class: "video_js #{Refinery::Videos.skin_css_class}",
+      class: "video-js #{Refinery::Videos.skin_css_class}",
       width: video.config[:width],
       height: video.config[:height],
       data: data_setup.to_json,
-      poster: video.poster.url||''
+      poster: video.poster.url || ''
       }
 
     sources = sources_html(video)

@@ -13,6 +13,7 @@ module Refinery
 
         def show
           @video = Video.find(params[:id])
+
         end
 
         def new
@@ -31,7 +32,6 @@ module Refinery
           params['video'].each do |key, value|
             @video.config[key.to_sym] = value
           end
-          #@html_for_wym = @video.to_html
         end
 
         def dialog_preview
