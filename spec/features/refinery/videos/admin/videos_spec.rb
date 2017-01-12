@@ -1,24 +1,16 @@
 # encoding: utf-8
 require "spec_helper"
-Capybara.javascript_driver = :webkit
 module Refinery
   module Videos
-    describe 'Admin' do
-      describe 'videos' do
+    describe 'Admin', type: :feature do
+      let(:logged_in_user) { Refinery::Core::NilUser.new }
 
-        before do
-          visit refinery.new_refinery_user_session_path
-          fill_in "Username", :with => 'admin@admin.com'
-          fill_in "Email", :with => 'admin@admin.com'
-          fill_in "Password", :with => 'admin@admin.com'
-          fill_in "Password confirmation", :with => 'admin@admin.com'
-          click_button "Sign up"
-        end
+      describe 'videos' do
 
         describe 'videos list' do
           before(:each) do
-            FactoryGirl.create(:valid_video, :title => 'UniqueTitleOne')
-            FactoryGirl.create(:valid_video, :title => 'UniqueTitleTwo')
+            FactoryGirl.create(:valid_video, title: 'UniqueTitleOne')
+            FactoryGirl.create(:valid_video, title: 'UniqueTitleTwo')
           end
 
           it "shows two items" do
@@ -28,17 +20,17 @@ module Refinery
           end
         end
 
-        describe "create", :js => true do
+        describe "create", js: true do
           before(:each) do
             visit refinery.videos_admin_videos_path
-            click_link "Add New Video"
+            find_link('Add New Video').trigger('click')
           end
 
-          context "valid data for embed video" do
-            it "should succeed" do
+          context "Embedded video" do
+            it "adds the embedded video" do
               click_link "Use embedded video"
-              fill_in "video_title", :with => "Test Video"
-              fill_in "video_embed_tag", :with => '<iframe src="http://player.vimeo.com/video/39432556" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
+              fill_in "video_title", with: "Test Video"
+              fill_in "video_embed_tag", with: '<iframe src="http://player.vimeo.com/video/39432556" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
               click_button "Save"
 
               expect(page).to have_content("'Test Video' was successfully added.")
@@ -46,22 +38,22 @@ module Refinery
             end
           end
 
-          context "valid data for file with url" do
-            it "should succeed" do
-              fill_in "video_title", :with => "Test Video"
+          context "Video with url" do
+            it "adds the video with external url" do
+              fill_in "video_title", with: "Test Video"
               choose 'Use external source'
-              fill_in 'video_video_files_attributes_0_external_url', :with => 'url'
+              fill_in 'video_video_files_attributes_0_external_url', with: 'url'
               click_button "Save"
               expect(page).to have_content("'Test Video' was successfully added.")
               expect(Refinery::Videos::Video.count).to eq(1)
             end
           end
 
-          context "valid data for file with file" do
-            it "should succeed" do
-              fill_in "video_title", :with => "Test Video"
-              file = File.join(Rails.root, 'spec/support/fixtures/video.flv')
-              attach_file('video_video_files_attributes_0_file', file)
+
+          context "Video with local files" do
+            it "adds the video with associated files" do
+              fill_in "video_title", with: "Test Video"
+              attach_file('video_video_files_attributes_0_file', 'spec/fixtures/video.flv')
               click_button "Save"
               expect(page).to have_content("'Test Video' was successfully added.")
               expect(Refinery::Videos::Video.count).to eq(1)
@@ -71,14 +63,14 @@ module Refinery
         end
 
         describe "edit" do
-          before(:each) { FactoryGirl.create(:valid_video, :title => "Test Video") }
+          before(:each) { FactoryGirl.create(:valid_video, title: "Test Video") }
 
           it "should succeed" do
             visit refinery.videos_admin_videos_path
             within ".actions" do
               click_link "Edit this video"
             end
-            fill_in "video_title", :with => "A different file_name"
+            fill_in "video_title", with: "A different file_name"
             click_button "Save"
             expect(page).to have_content("'A different file_name' was successfully updated.")
             expect(page).to have_no_content("Test Video")
@@ -87,7 +79,7 @@ module Refinery
         end
 
         describe "destroy" do
-          before(:each) { FactoryGirl.create(:valid_video, :title => "UniqueTitleOne") }
+          before(:each) { FactoryGirl.create(:valid_video, title: "UniqueTitleOne") }
           it "should succeed" do
             visit refinery.videos_admin_videos_path
             click_link "Remove this video forever"
@@ -98,8 +90,8 @@ module Refinery
 
         describe "insert video" do
           before(:each) do
-            FactoryGirl.create(:valid_video, :title => "Test Video1", :embed_tag => 'external_video1')
-            FactoryGirl.create(:valid_video, :title => "Test Video2", :embed_tag => 'external_video2')
+            FactoryGirl.create(:valid_video, title: "Test Video1", embed_tag: 'external_video1')
+            FactoryGirl.create(:valid_video, title: "Test Video2", embed_tag: 'external_video2')
           end
           it "should show list of available video" do
             visit refinery.insert_videos_admin_videos_path

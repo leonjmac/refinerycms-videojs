@@ -87,6 +87,7 @@ module Refinery
             video.video_files << video_file
           end
           it 'should return video tag with source' do
+            puts video.to_html
             expect(video.to_html).to match(/^<video.*<\/video>$/)
             expect(video.to_html).to match(/<source src=["']url_to_video_file['"]/)
             expect(video.to_html).to match(/data-setup/)

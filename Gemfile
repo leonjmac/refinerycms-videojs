@@ -2,13 +2,15 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'refinerycms', github: 'refinery/refinerycms'
+gem 'refinerycms', github: 'refinery/refinerycms', :branch => '3-0-stable'
+
 gem 'refinerycms-i18n', github: 'refinery/refinerycms-i18n'
 gem 'refinerycms-acts-as-indexed', github: 'refinery/refinerycms-acts-as-indexed'
+gem 'refinerycms-wymeditor', github: 'parndt/refinerycms-wymeditor'
 gem "mime-types", "~> 1.25"
 
 group :test do
-  gem 'refinerycms-testing', github: 'refinery/refinerycms'
+  gem 'refinerycms-testing'
   gem 'poltergeist'
   gem 'capybara-email', '~> 2.4'
 end

@@ -45,7 +45,7 @@ module Refinery
       end
 
       def s3_region
-        config.s3_region.presence || Core.s3_region_key
+        config.s3_region.presence || Core.s3_region
       end
 
       def custom_backend?

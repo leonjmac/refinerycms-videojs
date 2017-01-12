@@ -96,3 +96,4 @@ capybara-*html
 vendor/extensions/**/spec/dummy
 
 extensions/**/Gemfile.lock
+.rspec_failures

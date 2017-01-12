@@ -22,10 +22,6 @@ module Refinery
         end
       end
 
-      config.to_prepare do
-        ::ApplicationController.helper(VideosHelper)
-      end
-
       config.after_initialize do
         Refinery.register_extension(Refinery::Videos)
       end

@@ -5,11 +5,10 @@ parent.$.fn.getIndex = function(){
 selectedPart = parent.$('#page_parts .ui-tabs-active').getIndex();
 wym = parent.$.wymeditors(selectedPart);
 selectedBlock = wym.selected();
-html = "<%= render(partial: "show_video", locals: {video: @video}) %>"
 if (selectedBlock !== null) {
-  $(selectedBlock).append(html);
+  $(selectedBlock).append(<%=@html_for_wym%>);
 } else {
-    wym.html(wym.html() + html);
+    wym.html(wym.html() + <%=@html_for_wym%>);
 }
 wym.update();
 wym.close_dialog();

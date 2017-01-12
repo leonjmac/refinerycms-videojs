@@ -39,9 +39,44 @@ module Refinery
       after_initialize :set_default_config
       #####################################
 
+      def to_html
+        if use_shared
+          update_from_config
+          return embed_tag.html_safe
+        end
 
+        data_setup =  {}
+        ::Refinery::Videos::Video::CONFIG_OPTIONS.keys.reject{|opt| [:height, :width].include?(opt)}.each do |option|
+          data_setup[option] = config[option] || 'auto'
+        end
 
-      def short_info
+        data_setup.merge(poster: poster.url) if poster
+
+        options = {
+          id: "video_#{id}",
+          class: "video-js #{Refinery::Videos.skin_css_class}",
+          width: config[:width],
+          height: config[:height],
+          "data-setup": data_setup.to_json,
+          poster: '' || poster.url
+        }
+
+        content_tag(:video, sources_html, options, escape: false)
+      end
+
+      def sources_html
+        video_files.each.inject(ActiveSupport::SafeBuffer.new) do |buffer, file|
+          options = {
+            src: file.use_external ? file.external_url : file.url,
+            type: file.mime_type || file.file_mime_type
+
+          }
+          source = tag(:source, options, escape: false )
+          buffer  << source if file.exist?
+        end
+      end
+
+       def short_info
         return [['.shared_source', embed_tag.scan(/src=".+?"/).first]] if use_shared
         info = []
         video_files.each do |file|

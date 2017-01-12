@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
   s.files             = Dir["{app,config,db,lib}/**/*"]
 
   s.add_dependency 'dragonfly'
+  s.add_dependency 'dragonfly-s3_data_store'
   s.add_dependency 'rack-cache'
   s.add_dependency 'refinerycms-core'
+  s.add_dependency 'refinerycms-wymeditor', '1.1.0'
 end

@@ -3,7 +3,6 @@ module Refinery
     module Admin
       class VideosController < ::Refinery::AdminController
 
-      helper VideosHelper
         crudify :'refinery/videos/video',
                 :title_attribute => 'title',
                 :order => 'position ASC',
@@ -31,11 +30,13 @@ module Refinery
           params['video'].each do |key, value|
             @video.config[key.to_sym] = value
           end
-          #@html_for_wym = @video.to_html
+          @html_for_wym = @video.to_html
         end
+
 
         def dialog_preview
           @video = Video.find(params[:id].delete('video_'))
+          @preview_html = @video.to_html
           w, h = @video.config[:width], @video.config[:height]
           @video.config[:width], @video.config[:height] = 300, 200
           @video.config[:width], @video.config[:height] = w, h
