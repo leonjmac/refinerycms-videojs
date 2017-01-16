@@ -11,24 +11,36 @@
              :cancel_title => nil %>
 </div>
 
-<div id='dialog_preview'></div>
+<div id='dialog_preview'>
+  <span class="loading">
+    Loading Preview
+  </span>
+  <div id="video_preview">
+
+  </div>
+</div>
 <div id="preview_form"></div>
 
 <script type="text/javascript">
     $(function(){
+        $('#dialog_preview .loading').hide();
         $('#submit_button').on('click', function(){
             $('#preview_form form').submit();
         })
     });
 
-    $(function(){
-        $videos = $('#sortable_list li');
-        $videos.attr('style', 'cursor:pointer');
-        $videos.on('click', function(){
-            $videos.removeClass('selected');
-            $(this).addClass('selected');
-            var id = $(this).attr('id');
-            $.get('<%= refinery.dialog_preview_videos_admin_videos_path %>', {'id' : id}, null, 'script')
-        })
-    })
+    $(function() {
+      $videos = $('#sortable_list li');
+      $videos.attr('style', 'cursor:pointer');
+      $videos.on('click', function () {
+        $videos.removeClass('selected');
+        $(this).addClass('selected');
+        $('#video_preview').empty();
+        var id = $(this).attr('id');
+        $('#submit_button').prop('disabled', true);
+        $('#dialog_preview .loading').show();
+        $.get('<%= refinery.dialog_preview_videos_admin_videos_path %>', {'id': id}, null, 'script');
+
+      })
+    });
 </script>

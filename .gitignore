@@ -72,8 +72,6 @@ nbproject
 *.swp
 *.swo
 
-# RubyMine
-.idea
 
 # E-texteditor
 .eprj
@@ -97,3 +95,8 @@ vendor/extensions/**/spec/dummy
 
 extensions/**/Gemfile.lock
 .rspec_failures
+
+# node modules not used directly in project
+node_modules/
+
+*.json

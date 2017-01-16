@@ -19,7 +19,9 @@ describe Refinery::Videos::Admin::VideoFilesController, type: :controller do
 
     it 'redirects to the video previously associated with the file' do
       post :destroy, id: video_file.id
-      expect(response.status).to redirect_to(refinery.edit_videos_admin_video_path(video))
+      expect(response.status).to eq(302)
+      expect(response).to be_redirect
+      expect(response).to redirect_to "/refinery/videos/#{video.id}/edit"
     end
 
   end

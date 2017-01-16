@@ -84,6 +84,10 @@ module Refinery
         end
 
         info
+       end
+
+      def embed_source
+        embed_tag[/src="\b(\S*)\b"/, 1]
       end
 
       ####################################class methods
@@ -113,6 +117,7 @@ module Refinery
           embed_tag.gsub!(/src="\S+"/, "src=\"#{$1}?wmode=transparent\"")
         end
       end
+
 
       def one_source
         errors.add(:embed_tag, 'Please embed video') if use_shared && embed_tag.nil?

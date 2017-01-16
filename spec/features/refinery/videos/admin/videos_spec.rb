@@ -9,8 +9,8 @@ module Refinery
 
         describe 'videos list' do
           before(:each) do
-            FactoryGirl.create(:valid_video, title: 'UniqueTitleOne')
-            FactoryGirl.create(:valid_video, title: 'UniqueTitleTwo')
+            FactoryGirl.create(:video, title: 'UniqueTitleOne', use_shared: true, embed_tag: '<iframe></iframe>')
+            FactoryGirl.create(:video, title: 'UniqueTitleTwo', use_shared: true, embed_tag: '<iframe></iframe>')
           end
 
           it "shows two items" do
@@ -63,9 +63,9 @@ module Refinery
         end
 
         describe "edit" do
-          before(:each) { FactoryGirl.create(:valid_video, title: "Test Video") }
+          before(:each) { FactoryGirl.create(:video, title: "Test Video", use_shared: true, embed_tag: '<iframe></iframe>') }
 
-          it "should succeed" do
+          it 'can change video attributes' do
             visit refinery.videos_admin_videos_path
             within ".actions" do
               click_link "Edit this video"
@@ -79,7 +79,7 @@ module Refinery
         end
 
         describe "destroy" do
-          before(:each) { FactoryGirl.create(:valid_video, title: "UniqueTitleOne") }
+          before(:each) { FactoryGirl.create(:video, title: "UniqueTitleOne", use_shared: true, embed_tag: '<iframe></iframe>') }
           it "should succeed" do
             visit refinery.videos_admin_videos_path
             click_link "Remove this video forever"
@@ -90,8 +90,8 @@ module Refinery
 
         describe "insert video" do
           before(:each) do
-            FactoryGirl.create(:valid_video, title: "Test Video1", embed_tag: 'external_video1')
-            FactoryGirl.create(:valid_video, title: "Test Video2", embed_tag: 'external_video2')
+            FactoryGirl.create(:video, title: "Test Video1", use_shared: true, embed_tag: 'external_video1')
+            FactoryGirl.create(:video, title: "Test Video2", use_shared: true, embed_tag: 'external_video2')
           end
           it "should show list of available video" do
             visit refinery.insert_videos_admin_videos_path

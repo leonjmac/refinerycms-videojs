@@ -1,2 +1,4 @@
-$('#dialog_preview').html(@preview_html);
+$('#dialog_preview .loading').hide();
+$('#submit_button').prop('disabled', false);
+$('#video_preview').html('<%= escape_javascript(@preview_html) %>');
 $('#preview_form').html('<%= escape_javascript(render("preview_form")) %>');

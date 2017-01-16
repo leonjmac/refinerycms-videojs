@@ -2,20 +2,21 @@
 
   <div class='title'>
     <%= video.title %>
-    <span class='files'>(<%= video.video_files.map{|vf| vf.use_external ? vf.external_url : vf.file_name}.to_sentence %> )</span>
+      <span class='files'>(
+        <% if video.use_shared %>
+          <%= video.embed_source %></span>
+        <%else%>
+          <%= video.video_files.map{|vf| vf.use_external ? vf.external_url : vf.file_name}.join(' ') %>
+        <% end %>
+      )</span>
   </div>
   <% unless action_name =~ /insert/   %>
     <span class='actions'>
-      <%= link_to refinery_icon_tag('eye.png'), refinery.videos_admin_video_path(video, :dialog => true),
-                  :title => t('.view_live_html'),
-                  :target => "_blank" %>
-      <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_videos_admin_video_path(video),
-                  :title => t('.edit') %>
-      <%= link_to refinery_icon_tag("delete.png"), refinery.videos_admin_video_path(video),
-                  :class => "cancel confirm-delete",
-                  :title => t('.delete'),
-                  :confirm => t('message', :scope => 'refinery.admin.delete', :title => video.title),
-                  :method => :delete %>
+      <%=	action_icon 'preview', refinery.videos_admin_video_path(video, dialog: true), t('.view_live_html'), target: '_blank' %>
+      <%=	action_icon 'edit',   refinery.edit_videos_admin_video_path(video), t('.edit') %>
+      <%= action_icon 'delete', refinery.videos_admin_video_path(video), t('.delete'), class: 'confirm-delete',
+                                 data: { confirm: t('message', scope: 'refinery.admin.delete', title: video.title)} %>
+
     </span>
   <% end %>
 </li>

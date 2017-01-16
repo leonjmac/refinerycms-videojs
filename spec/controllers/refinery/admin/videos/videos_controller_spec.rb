@@ -5,7 +5,7 @@ describe Refinery::Videos::Admin::VideosController,  type: :controller do
   let(:logged_in_user) { Refinery::Core::NilUser.new }
 
   describe 'insert video' do
-    let!(:video) { FactoryGirl.create(:valid_video, title: "TestVideo")}
+    let!(:video) { FactoryGirl.create(:video, title: "TestVideo", use_shared: true, embed_tag: '<iframe></iframe>')}
 
     it 'renders the insert template' do
       get :insert, app_dialog: true, dialog: true

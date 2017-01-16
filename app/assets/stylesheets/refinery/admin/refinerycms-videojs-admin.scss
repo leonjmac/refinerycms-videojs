@@ -1,6 +1,9 @@
+@import 'refinery_icons';
+$cms_blue: rgb(37, 169, 244);
 .wym_skin_refinery .wym_section li.wym_tools_add_video a{
     height: 24px;
-    background-image: image-url('add_video_icon.png');
+    // color from refinery/core/app/assets/stylesheets/refinery/sections/_layout.scss
+    @include icon('video-camera', lighten($cms_blue, 10%));
     background-repeat: no-repeat;
     padding-left: 24px;
 }
@@ -57,33 +60,39 @@ div.add_remove_buttons{
     margin-top: 10px
 }
 
-#dialog_list{
+#dialog_list {
   width: 40%;
   float: left;
   min-height: 300px;
+
+  li {
+    border: 1px solid grey;
+    background-color: #ddd;
+
+    &:nth-child(even) {
+      background-color: #ccc;
+    }
+    &.selected {
+      border: 4px solid $cms_blue;
+    }
+  }
 }
-#preview {
+
+#dialog_preview {
   width: 55%;
   min-height: 300px;
-  float:left;
-}
-#preview.loading {
-  background: url('loading.svg') 50% 50% no-repeat;
+  float:right;
 
-}
-div#dialog_list li {
-  border:1px solid grey;
-  background-color: #ddd;
-}
-div#dialog_list li::nth-child(even) {background-color:#ccc;}
-div#dialog_list li.selected{  border: 4px solid #22A7F2;}
-
-div#dialog_preview{
-  width:100%;
+  .loading {
+    background-image: asset_url('loading.svg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
 }
 
-div#preview_form{
-  width:100%;
+div#preview_form {
+  width:50%;
+  float:right;
 }
 
 div#preview_form div.dimensions{

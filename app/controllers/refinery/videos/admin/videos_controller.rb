@@ -36,11 +36,11 @@ module Refinery
 
         def dialog_preview
           @video = Video.find(params[:id].delete('video_'))
-          @preview_html = @video.to_html
-          w, h = @video.config[:width], @video.config[:height]
+           w, h = @video.config[:width], @video.config[:height]
           @video.config[:width], @video.config[:height] = 300, 200
-          @video.config[:width], @video.config[:height] = w, h
           @embedded = true if @video.use_shared
+          @preview_html = @video.to_html
+          @video.config[:width], @video.config[:height] = w, h
         end
 
         def video_params

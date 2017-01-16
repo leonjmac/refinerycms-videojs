@@ -1,14 +1,15 @@
 parent.$.fn.getIndex = function(){
     var $p=$(this).parent().children();
     return $p.index(this);
-}
-selectedPart = parent.$('#page_parts .ui-tabs-active').getIndex();
-wym = parent.$.wymeditors(selectedPart);
-selectedBlock = wym.selected();
+};
+var selectedPart = parent.$('#page_parts .ui-tabs-active').getIndex();
+var wym = parent.$.wymeditors(selectedPart);
+var selectedBlock = wym.selected();
+var html = '<%= escape_javascript(@html_for_wym) %>';
 if (selectedBlock !== null) {
-  $(selectedBlock).append(<%=@html_for_wym%>);
+  $(selectedBlock).append(html);
 } else {
-    wym.html(wym.html() + <%=@html_for_wym%>);
+    wym.html(wym.html() + html);
 }
 wym.update();
 wym.close_dialog();
