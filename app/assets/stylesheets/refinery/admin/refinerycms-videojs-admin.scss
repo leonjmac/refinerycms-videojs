@@ -80,18 +80,23 @@ div.add_remove_buttons{
 
 #dialog_preview {
   width: 55%;
-  min-height: 300px;
+  min-height: 200px;
+  min-width: 300px;
   float:right;
+  //background-color: #ccc;
+  //border: 1px solid #aaa;
 
   .loading {
-    background-image: asset_url('loading.svg');
+    width:200px;
+    height:200px;
+    background-image: asset_url('refinery/loading.svg');
     background-position: 50% 50%;
     background-repeat: no-repeat;
   }
 }
 
 div#preview_form {
-  width:50%;
+  width:55%;
   float:right;
 }
 

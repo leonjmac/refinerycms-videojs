@@ -1,4 +1,4 @@
-$('#dialog_preview .loading').hide();
-$('#submit_button').prop('disabled', false);
+$('#dialog_preview .loading').empty().toggle();
+$('#submit_button').prop('disabled', false).css('background-color', '#2aa0f2');
 $('#video_preview').html('<%= escape_javascript(@preview_html) %>');
 $('#preview_form').html('<%= escape_javascript(render("preview_form")) %>');
