@@ -2,17 +2,16 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'refinerycms', github: 'refinery/refinerycms', :branch => '3-0-stable'
+gem 'refinerycms', git: 'https://github.com/refinery/refinerycms', :branch => '3-0-stable'
 
-gem 'refinerycms-i18n', github: 'refinery/refinerycms-i18n'
-gem 'refinerycms-acts-as-indexed', github: 'refinery/refinerycms-acts-as-indexed'
-gem 'refinerycms-wymeditor', github: 'parndt/refinerycms-wymeditor'
+gem 'refinerycms-i18n',             git:'https://github.com/refinery/refinerycms-i18n'
+gem 'refinerycms-acts-as-indexed',  git:'https://github.com/refinery/refinerycms-acts-as-indexed'
+gem 'refinerycms-wymeditor',        git:'https://github.com/parndt/refinerycms-wymeditor'
 gem "mime-types", "~> 1.25"
 
 group :test do
   gem 'refinerycms-testing'
   gem 'poltergeist'
-  gem 'capybara-email', '~> 2.4'
 end
 
 # Database Configuration

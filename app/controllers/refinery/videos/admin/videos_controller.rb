@@ -26,6 +26,7 @@ module Refinery
         end
 
         def append_to_wym
+          return if params[:video_id].blank?
           @video = Video.find(params[:video_id])
           params['video'].each do |key, value|
             @video.config[key.to_sym] = value
