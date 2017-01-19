@@ -100,3 +100,5 @@ extensions/**/Gemfile.lock
 node_modules/
 
 *.json
+
+.rspec_failures

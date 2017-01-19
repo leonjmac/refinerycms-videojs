@@ -10,6 +10,9 @@ module Refinery
 
           app.configure do
             plugin :imagemagick
+            datastore :file, {
+              :root_path => Refinery::Videos.datastore_root_path
+            }
             url_format Refinery::Videos.dragonfly_url_format
             url_host Refinery::Videos.dragonfly_url_host
             verify_urls Refinery::Videos.dragonfly_verify_urls
@@ -20,6 +23,22 @@ module Refinery
             response_header 'Content-Disposition' 'attachment;'
             datastore :file, {:root_path => Refinery::Videos.datastore_root_path}
           end
+
+
+          if Refinery::Videos.custom_backend?
+            app.datastore = Refinery::Videos.custom_backend_class.new(Refinery::Videos.custom_backend_opts)
+            if ::Refinery::Videos.s3_backend
+              datatstore :file, {
+                bucket_name:   Refinery::Videos.s3_bucket_name,
+                access_key_id: Refinery::Videos.s3_access_key_id,
+                secret_access_key: Refinery::Videos.s3_secret_access_key
+              }.tap { |ds|
+	                # S3 Region otherwise defaults to 'us-east-1'
+	                ds.region = Refinery::Videos.s3_region if Refinery::Videos.s3_region
+                }
+            end
+          end
+
           if ::Refinery::Videos.s3_backend
             require 'dragonfly/s3_data_store'
             options = {
@@ -29,11 +48,11 @@ module Refinery
             }
             # S3 Region otherwise defaults to 'us-east-1'
             options.update(region: Refinery::Videos.s3_region) if Refinery::Videos.s3_region
-            app.use_datastore :s3, options
+            app_videos.use_datastore :s3, options
           end
 
-          if Refinery::Videos.custom_backend?
-            app.datastore = Refinery::Videos.custom_backend_class.new(Refinery::Videos.custom_backend_opts)
+          if Videos.custom_backend?
+            app_videos.datastore = Videos.custom_backend_class.new(Videos.custom_backend_opts)
           end
         end
 

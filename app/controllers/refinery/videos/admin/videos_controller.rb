@@ -34,7 +34,6 @@ module Refinery
           @html_for_wym = @video.to_html
         end
 
-
         def dialog_preview
           @video = Video.find(params[:id].delete('video_'))
            w, h = @video.config[:width], @video.config[:height]

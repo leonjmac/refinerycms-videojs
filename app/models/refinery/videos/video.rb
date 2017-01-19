@@ -76,15 +76,14 @@ module Refinery
         end
       end
 
-       def short_info
-        return [['.shared_source', embed_tag.scan(/src=".+?"/).first]] if use_shared
-        info = []
-        video_files.each do |file|
-          info << file.short_info
-        end
-
-        info
-       end
+      def short_info
+          return [['.shared_source', embed_tag.scan(/src=".+?"/).first]] if use_shared
+          info = []
+          video_files.each do |file|
+            info << file.short_info
+          end
+          info
+      end
 
       def embed_source
         embed_tag[/src="\b(\S*)\b"/, 1]
@@ -117,7 +116,6 @@ module Refinery
           embed_tag.gsub!(/src="\S+"/, "src=\"#{$1}?wmode=transparent\"")
         end
       end
-
 
       def one_source
         errors.add(:embed_tag, 'Please embed a video') if use_shared && embed_tag.nil?
