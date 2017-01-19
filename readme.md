@@ -1,15 +1,15 @@
 # Refinery CMS Video.js
-## Sorry, not supported. See forks.
-Simple video extension for [Refinery CMS](http://refinerycms.com).
-It adds a 'Videos' tab to admin menu where you can manage videos.
-And adds an 'add video' link to WYMeditor on 'Pages'.
+## Compatible with Refinery 3
+
+This is a a simple video extension for [Refinery CMS](http://refinerycms.com).
+which adds an 'Add Video' link to the default page editor (WYMEditor)
 
 There are three ways to include videos in your project.
-- You can embedded video (like youtube or vimeo iframes)
+- You can embedded video (for instance,  youtube or vimeo iframes)
 - You can upload files
 - You can use link to external source
 
-Video (instance of `Refinery::Videos::Video` model) aggregates different sources (files and links, one or many).
+A video (instance of `Refinery::Videos::Video` model) aggregates different sources (files and links, one or many).
 
 The instance method `Video#to_html` renders an html video tag like:
 
@@ -38,7 +38,7 @@ This extension:
   * Automatically downloads the video.js library on your website frontend.
 
 ## Requirements
-Refinery CMS version 2.0.1 or above
+Refinery CMS version 3.0.1 or above
 
 ## Install
 Open up your ``Gemfile`` and add at the bottom this line:
@@ -48,7 +48,7 @@ gem 'refinerycms-videojs'
 ```
 Get the latest version with:
 ```ruby
-gem 'refinerycms-videojs', git: 'git@github.com:adexin-team/refinerycms-videojs.git'
+gem 'refinerycms-videojs', git: 'https://anitagraham/refinerycms-videojs.git'
 ```
 
 Now, run: 
@@ -67,4 +67,3 @@ And you're done.
 
 ## More Information
 - Check out Refinery CMS [guides](http://refinerycms.com/guides)
-- Check out our [website](http://adexin.com)
