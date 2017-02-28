@@ -57,7 +57,7 @@ module Refinery
           class: "video-js #{Refinery::Videos.skin_css_class}",
           width: config[:width],
           height: config[:height],
-          "data-setup": data_setup.to_json,
+          :"data-setup" => data_setup.to_json,
           poster: '' || poster.url
         }
 
