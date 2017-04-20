@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Refinery
   module Videos
-    describe Video do
+    describe Video, type: :model do
 
       describe 'Validation' do
 
@@ -76,7 +76,7 @@ module Refinery
 
       end
 
-      describe 'video to_html method' do
+      describe '#to_html' do
         context 'with file' do
           let(:video_file) { FactoryGirl.build(:video_file) }
           let(:video) { Video.new(use_shared: false) }
@@ -84,11 +84,12 @@ module Refinery
             allow(video_file).to receive(:url).and_return('url_to_video_file')
             video.video_files << video_file
           end
-          it 'should return video tag with source' do
-            puts video.to_html
-            expect(video.to_html).to match(/^<video.*<\/video>$/)
-            expect(video.to_html).to match(/<source src=["']url_to_video_file['"]/)
-            expect(video.to_html).to match(/data-setup/)
+          it 'returns video tag with source' do
+            let(:html){video.to_html}
+            expect(html).to match(/^<video.*<\/video>$/)
+            expect(html).to match(/<source src=["']url_to_video_file['"]/)
+            #  single quotes around the data-setup stop double quote confusion later
+            expect(html).to match(/data-setup='\{-+\}'/)
           end
         end
 
@@ -100,7 +101,7 @@ module Refinery
               embed_tag: "<iframe width=\"560\" height=\"315\" src=\"http://www.youtube.com/embed/L5J8cIQHlnY\" frameborder=\"0\" allowfullscreen></iframe>")
           end
 
-          it 'should return video tag with iframe' do
+          it 'returns video tag with iframe' do
             expect(video.to_html).to match(/^<iframe.*<\/iframe>$/)
             expect(video.to_html).to match(/www\.youtube\.com/)
             expect(video.to_html).to match(/wmode=transparent/)

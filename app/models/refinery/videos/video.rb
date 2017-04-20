@@ -61,7 +61,7 @@ module Refinery
           poster: '' || poster.url
         }
 
-        content_tag(:video, sources_html, options, escape: false)
+        content_tag(:video, sources_html, options, escape: false).sub(/data-setup="(\{.+\})"/,"data-setup='\\1'")
       end
 
       def sources_html
