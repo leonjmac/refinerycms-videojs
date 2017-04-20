@@ -21,6 +21,14 @@ module Refinery
             end
             dragonfly_url nil
             response_header 'Content-Disposition' 'attachment;'
+            response_header "Cache-Control" do |job, request, headers|
+              if job.size > 1048576
+                "no-cache, no-store"
+              else
+                "public, max-age=31536000" # (1 year)
+              end
+            end
+            response_header "ETag": %("#{job.signature}")
             datastore :file, {:root_path => Refinery::Videos.datastore_root_path}
           end
 
