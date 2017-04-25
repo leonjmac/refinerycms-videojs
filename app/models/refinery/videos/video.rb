@@ -20,8 +20,8 @@ module Refinery
       ################## Video config options
       serialize :config, Hash
       CONFIG_OPTIONS = {
-          :autoplay => "false", :width => "400", :height => "300",
-          :controls => "true", :preload => "true", :loop => "true"
+        autoplay: 'false', width: '400', height: '300',
+        controls: 'true', preload: 'true', loop: 'true'
       }
 
       # Create getters and setters
@@ -45,23 +45,15 @@ module Refinery
           return embed_tag.html_safe
         end
 
-        data_setup =  {}
-        ::Refinery::Videos::Video::CONFIG_OPTIONS.keys.reject{|opt| [:height, :width].include?(opt)}.each do |option|
-          data_setup[option] = config[option] || 'auto'
-        end
-
-        data_setup.merge(poster: poster.url) if poster
-
+        # config options which are false shouldn't be included in the markup
+        #        options which have a value "true" should become true
         options = {
           id: "video_#{id}",
           class: "video-js #{Refinery::Videos.skin_css_class}",
-          width: config[:width],
-          height: config[:height],
-          :"data-setup" => data_setup.to_json,
           poster: '' || poster.url
-        }
+        }.merge(config.select{|k, v| v != "false"}.transform_values{|val| val=="true" ? true : val})
 
-        content_tag(:video, sources_html, options, escape: false).sub(/data-setup="(\{.+\})"/,"data-setup='\\1'")
+        content_tag(:video, sources_html, options, false)
       end
 
       def sources_html

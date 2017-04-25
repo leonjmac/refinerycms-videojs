@@ -61,7 +61,7 @@ module Refinery
           let(:video) { Video.new }
           it 'should have config' do
             expect(video.config.class).to eq(Hash)
-            expect(video.config[:preload]).to eq('true')
+            expect(video.config[:preload]).to eq("true")
           end
         end
 
@@ -77,19 +77,17 @@ module Refinery
       end
 
       describe '#to_html' do
+        let(:video_file) { FactoryGirl.build(:video_file) }
+        let(:video) { Video.new(use_shared: false) }
+        let(:html){video.to_html}
         context 'with file' do
-          let(:video_file) { FactoryGirl.build(:video_file) }
-          let(:video) { Video.new(use_shared: false) }
           before do
             allow(video_file).to receive(:url).and_return('url_to_video_file')
             video.video_files << video_file
           end
           it 'returns video tag with source' do
-            let(:html){video.to_html}
             expect(html).to match(/^<video.*<\/video>$/)
             expect(html).to match(/<source src=["']url_to_video_file['"]/)
-            #  single quotes around the data-setup stop double quote confusion later
-            expect(html).to match(/data-setup='\{-+\}'/)
           end
         end
 
