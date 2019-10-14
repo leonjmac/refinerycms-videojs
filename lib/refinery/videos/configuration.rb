@@ -49,15 +49,15 @@ module Refinery
       end
 
       def custom_backend?
-        config.custom_backend_class.presence || Core.dragonfly_custom_backend?
+        config.custom_backend_class.presence || Dragonfly.custom_datastore?
       end
 
       def custom_backend_class
-        config.custom_backend_class.presence || Core.dragonfly_custom_backend_class
+        config.custom_backend_class.presence || Dragonfly.custom_datastore_class
       end
 
       def custom_backend_opts
-        config.custom_backend_opts.presence || Core.dragonfly_custom_backend_opts
+        config.custom_backend_opts.presence || Dragonfly.custom_backend_opts
       end
     end
   end
