@@ -12,7 +12,7 @@ module Refinery
                     :skin_css_class
 
 
-    self.dragonfly_secret = Refinery::Core.dragonfly_secret
+    self.dragonfly_secret = Refinery::Dragonfly.secret.inspect
     self.dragonfly_url_format = '/system/videos/:job/:basename.:format'
     self.dragonfly_url_host = ''
     self.dragonfly_verify_urls = true
