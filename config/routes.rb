@@ -7,7 +7,7 @@ Refinery::Core::Engine.routes.draw do
   end
 
   # Backend routes
-  namespace :videos, :path => '' do
+  # namespace :videos, :path => '' do
     namespace :admin, :path => Refinery::Core.backend_route do
       resources :videos do
         post :append_to_wym
@@ -19,6 +19,6 @@ Refinery::Core::Engine.routes.draw do
       end
       resources :video_files, :only => [:destroy]
     end
-  end
+  # end
 
 end
