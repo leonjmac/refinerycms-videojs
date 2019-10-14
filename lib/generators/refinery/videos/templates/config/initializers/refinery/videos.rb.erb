@@ -12,16 +12,17 @@ Refinery::Videos.configure do |config|
     # config.skin_css_class = <%= Refinery::Videos.skin_css_class %>
 
     # Configure Dragonfly
+    config.dragonfly_name = :refinery_videos
     # config.dragonfly_verify_urls = <%= Refinery::Videos.dragonfly_verify_urls %>
-    config.dragonfly_secret = <%= Refinery::Videos.dragonfly_secret.inspect %>
-    # config.dragonfly_url_format = <%= Refinery::Videos.dragonfly_url_format.inspect %>
+    # config.dragonfly_secret = <%= Refinery::Videos.dragonfly_secret.inspect %>
     # config.dragonfly_url_host = <%= Refinery::Videos.dragonfly_url_host.inspect %>
-    # config.datastore_root_path = <%= Refinery::Videos.datastore_root_path.inspect %>
+    # config.dragonfly_datastore_root_path = <%= Refinery::Videos.dragonfly_datastore_root_path.inspect %>
+    # config.dragonfly_url_format = <%= Refinery::Videos.dragonfly_url_format.inspect %>
 
     # Configure Dragonfly custom storage backend
     # The custom_backend setting by default defers to the core setting for this but can be set just for videos.
-    # config.custom_backend_class = <%= Refinery::Videos.custom_backend_class.inspect %>
-    # config.custom_backend_opts = <%= Refinery::Videos.custom_backend_opts.inspect %>
+    # config.custom_backend_class = <%= Refinery::Videos.dragonfly_custom_backend_class.inspect %>
+    # config.custom_backend_opts = <%= Refinery::Videos.dragonfly_custom_backend_opts.inspect %>
 
     # Configure S3 (you can also use ENV for this)
     # The s3_backend setting by default defers to the core setting for this but can be set just for videos.
