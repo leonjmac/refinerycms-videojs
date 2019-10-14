@@ -1,4 +1,4 @@
-Refinery::Admin::DialogsController::TYPES << 'video'
+#Refinery::Admin::DialogsController::TYPES << 'video'
 Refinery::Admin::DialogsController.prepend(
   Module.new do
     def find_iframe_src
