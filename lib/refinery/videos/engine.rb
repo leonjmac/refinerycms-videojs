@@ -6,9 +6,11 @@ module Refinery
       isolate_namespace Refinery
       engine_name :refinery_videos
 
+      config.autoload_paths += %W( #{config.root}/lib )
+      
       initializer 'attach-refinery-videos-with-dragonfly', before: :finisher_hook do |app|
-        ::Refinery::Videos::Dragonfly.configure!(::Refinery::Videos)
-        ::Refinery::Videos::Dragonfly.attach!(app, ::Refinery::Videos)
+        ::Refinery::Dragonfly.configure!(::Refinery::Videos)
+        ::Refinery::Dragonfly.attach!(app, ::Refinery::Videos)
       end
 
      before_inclusion do
