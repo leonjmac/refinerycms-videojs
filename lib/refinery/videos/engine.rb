@@ -3,11 +3,11 @@ module Refinery
     class Engine < Rails::Engine
       extend Refinery::Engine
 
-      isolate_namespace Refinery
+      isolate_namespace Refinery::Videos
       engine_name :refinery_videos
 
       config.autoload_paths += %W( #{config.root}/lib )
-      
+
       initializer 'attach-refinery-videos-with-dragonfly', before: :finisher_hook do |app|
         ::Refinery::Dragonfly.configure!(::Refinery::Videos)
         ::Refinery::Dragonfly.attach!(app, ::Refinery::Videos)
@@ -18,7 +18,7 @@ module Refinery
           plugin.pathname = root
           plugin.name = 'refinery_videos'
           plugin.menu_match = %r{refinery/videos/video(_dialog)?s$}
-          plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.admin_videos_path }
+          plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.videos_admin_videos_path }
           #plugin.always_allow_access = true
         end
       end
