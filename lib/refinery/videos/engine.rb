@@ -18,7 +18,7 @@ module Refinery
           plugin.pathname = root
           plugin.name = 'refinery_videos'
           plugin.menu_match = %r{refinery/videos/video(_dialog)?s$}
-          plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.videos_admin_videos_path }
+          plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.admin_videos_path }
           #plugin.always_allow_access = true
         end
       end
